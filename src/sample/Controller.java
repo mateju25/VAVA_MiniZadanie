@@ -3,7 +3,12 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.awt.Desktop;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,5 +50,12 @@ public class Controller {
     }
 
     public void openCheatScheet(ActionEvent actionEvent) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                URL url = getClass().getResource("/sample/regex_cheatsheet.pdf");
+                File myFile = new File(url.toURI());
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException | URISyntaxException ex) {}
+        }
     }
 }
